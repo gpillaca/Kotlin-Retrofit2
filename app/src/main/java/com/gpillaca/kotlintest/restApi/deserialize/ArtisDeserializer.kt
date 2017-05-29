@@ -1,5 +1,6 @@
 package com.gpillaca.kotlintest.restApi.deserialize
 
+import android.util.Log
 import com.google.gson.*
 import com.gpillaca.kotlintest.model.Artist
 import com.gpillaca.kotlintest.restApi.JsonKeys
@@ -53,7 +54,6 @@ class ArtisDeserializer: JsonDeserializer<ArtistResponse> {
 
             var url = imageData.get(JsonKeys.ARTIST_URL).asString
             var size = imageData.get(JsonKeys.ARTIST_URL_SIZE).asString
-
             url.replace("\\/", "/")
 
             if (url.isEmpty()){
@@ -62,8 +62,8 @@ class ArtisDeserializer: JsonDeserializer<ArtistResponse> {
 
             if (size.matches(JsonKeys.IMAGE_MEDIUM.toRegex())) {
                 images[0] = url
-            } else if (size.matches(JsonKeys.IMAGE_MEDIUM.toRegex())) {
-                    images[1] = url
+            } else if (size.matches(JsonKeys.IMAGE_LARGE.toRegex())) {
+                images[1] = url
             }
         }
 
